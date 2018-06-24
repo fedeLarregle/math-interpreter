@@ -5,23 +5,16 @@ import java.util.List;
 
 public class Evaluator {
 
-    private static final Evaluator instance;
     private List<Token> tokens;
     private int index;
 
-    static {
-        instance = new Evaluator();
-    }
-
-    private Evaluator() {
+    public Evaluator() {
         this.tokens = new ArrayList<>();
         this.index = 0;
     }
 
-    public static Evaluator getInstance() { return instance; }
-
     public double evaluate(String expression) {
-        this.tokens = Tokenizer.getInstance().parse(expression);
+        this.tokens = new Tokenizer().parse(expression);
         return evalExpression();
     }
 

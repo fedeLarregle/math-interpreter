@@ -5,16 +5,9 @@ import java.util.List;
 
 public class Tokenizer {
 
-    private static final Tokenizer instance;
     private int index;
 
-    static {
-        instance = new Tokenizer();
-    }
-
-    private Tokenizer() { this.index = 0; }
-
-    public static Tokenizer getInstance() { return instance; }
+    public Tokenizer() { this.index = 0; }
 
     public List<Token> parse(String expression) {
         List<Token> result = new ArrayList<>();
