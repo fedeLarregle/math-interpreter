@@ -34,7 +34,8 @@ public class Evaluator {
         while(true) {
             if (index < tokens.size()) {
                 if (tokens.get(index).getTokenType().equals(Token.TokenType.MULTIPLY)) { index++; x *= evalFactor(); }
-                else if (tokens.get(index).getTokenType().equals(Token.TokenType.DIVIDE)) { index++; x /= -evalFactor(); }
+                else if (tokens.get(index).getTokenType().equals(Token.TokenType.DIVIDE)) { index++; x /= evalFactor(); }
+                else if (tokens.get(index).getTokenType().equals(Token.TokenType.POW)) { index++; x = Math.pow(x, evalFactor()); }
             }
             return x;
         }

@@ -19,6 +19,21 @@ public class EvaluatorTest {
     }
 
     @Test
+    public void evaluateMultiply() throws Exception {
+        Assert.assertEquals(new Evaluator().evaluate("9 * 9"), 81D, DELTA);
+    }
+
+    @Test
+    public void evaluateDivide() throws Exception {
+        Assert.assertEquals(new Evaluator().evaluate("9 / 9"), 1D, DELTA);
+    }
+
+    @Test
+    public void evaluatePow() throws Exception {
+        Assert.assertEquals(new Evaluator().evaluate("5 ^ 2"), 25D, DELTA);
+    }
+
+    @Test
     public void evaluateSqrt() throws Exception {
         Assert.assertEquals(new Evaluator().evaluate("sqrt(9)"), 3D, DELTA);
     }

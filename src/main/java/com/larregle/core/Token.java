@@ -41,6 +41,6 @@ public class Token {
     }
 
     public static enum TokenType {
-        NUMBER, FUNCTION, PLUS, MINUS, MULTIPLY, DIVIDE, OPEN_BRACE, CLOSE_BRACE
+        NUMBER, FUNCTION, PLUS, MINUS, MULTIPLY, DIVIDE, POW, OPEN_BRACE, CLOSE_BRACE
     }
 }

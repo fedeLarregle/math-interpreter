@@ -53,6 +53,10 @@ public class Tokenizer {
                 token.setTokenType(Token.TokenType.MULTIPLY);
                 break;
             }
+            case '^': {
+                token.setTokenType(Token.TokenType.POW);
+                break;
+            }
             default:
                 if (Character.isDigit(c)) {
                     if (expression.length() > (index + 1)) {
