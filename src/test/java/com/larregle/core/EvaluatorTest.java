@@ -1,7 +1,6 @@
 package com.larregle.core;
 
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class EvaluatorTest {
@@ -51,5 +50,11 @@ public class EvaluatorTest {
     public void evaluateMultipleGroupedOperations() throws Exception {
         Assert.assertEquals(new Evaluator().evaluate("(sqrt(3 * 3) + sqrt(3 * 3)) * 2"), 12D, DELTA);
     }
+
+    @Test
+    public void evaluateMultipleGroupedOperationsWithUnaryOperator() throws Exception {
+        Assert.assertEquals(new Evaluator().evaluate("((4 - 2^3 + 1) * -sqrt(3*3 + (sqrt(3*3)+13))) + 2"), 17D, DELTA);
+    }
+
 
 }
