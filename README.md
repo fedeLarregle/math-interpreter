@@ -1,6 +1,6 @@
 # math-interpreter
 
-Well as the title sais, this is a simple math interpreter.
+Well as the title says, this is a simple math interpreter.
 For now, you can use:
 * Decimal numbers and integer numbers
 * Functions:
