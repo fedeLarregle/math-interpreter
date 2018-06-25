@@ -4,9 +4,16 @@ Well as the title sais, this is a simple math interpreter.
 For now, you can use:
 * Decimal numbers and integer numbers
 * Functions:
-...* tan, sin, cos and sqrt
+    * tan
+    * sin
+    * cos
+    * sqrt
 * Binary Operators:
-...* * / - +
+    * multiply (*)
+    * divide (/)
+    * minus (-)
+    * plus (+)
+    * pow (^)
 * Group by parentheses: ()
 
 A few examples:
