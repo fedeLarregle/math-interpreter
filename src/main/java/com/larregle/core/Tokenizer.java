@@ -15,7 +15,6 @@ public class Tokenizer {
         while (index < expression.length()) {
             if (Character.isWhitespace(expression.charAt(index))) { index++; continue; }
             result.add(getToken(expression));
-            index++;
         }
 
         return result;
@@ -30,47 +29,52 @@ public class Tokenizer {
 
         switch (c) {
             case '(': {
-                token.setTokenType(Token.TokenType.OPEN_BRACE);
+                token.setTokenType(Token.TokenType.OPEN_BRACE); index++;
                 break;
             }
             case ')': {
-                token.setTokenType(Token.TokenType.CLOSE_BRACE);
+                token.setTokenType(Token.TokenType.CLOSE_BRACE); index++;
                 break;
             }
             case '+': {
-                token.setTokenType(Token.TokenType.PLUS);
+                token.setTokenType(Token.TokenType.PLUS); index++;
                 break;
             }
             case '-': {
-                token.setTokenType(Token.TokenType.MINUS);
+                token.setTokenType(Token.TokenType.MINUS); index++;
                 break;
             }
             case '/': {
-                token.setTokenType(Token.TokenType.DIVIDE);
+                token.setTokenType(Token.TokenType.DIVIDE); index++;
                 break;
             }
             case '*': {
-                token.setTokenType(Token.TokenType.MULTIPLY);
+                token.setTokenType(Token.TokenType.MULTIPLY); index++;
                 break;
             }
             case '^': {
-                token.setTokenType(Token.TokenType.POW);
+                token.setTokenType(Token.TokenType.POW); index++;
                 break;
             }
             default:
                 if (Character.isDigit(c)) {
-                    if (expression.length() > (index + 1)) {
-                        while (Character.isDigit(expression.charAt(index + 1)) || expression.charAt(index + 1) == '.') {index++;}
+                    while (expression.length() > index) {
+                        if(Character.isDigit(expression.charAt(index)) || expression.charAt(index) == '.') {
+                            index++;
+                        } else { break; }
                     }
+
                     token.setTokenType(Token.TokenType.NUMBER);
-                    token.setText(expression.substring(startPosition, index + 1));
+                    token.setText(expression.substring(startPosition, index));
                     break;
                 }
                 else if (Character.isAlphabetic(c)) {
-                    if (expression.length() > (index + 1)) {
-                        while (Character.isAlphabetic(expression.charAt(index + 1))) {index++;}
+                    while (expression.length() > index) {
+                        if (Character.isAlphabetic(expression.charAt(index))) {
+                            index++;
+                        } else { break; }
                     }
-                    token.setText(expression.substring(startPosition, index + 1));
+                    token.setText(expression.substring(startPosition, index));
                     token.setTokenType(Token.TokenType.FUNCTION);
                     break;
                 }

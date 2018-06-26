@@ -56,5 +56,9 @@ public class EvaluatorTest {
         Assert.assertEquals(new Evaluator().evaluate("((4 - 2^3 + 1) * -sqrt(3*3 + (sqrt(3*3)+13))) + 2"), 17D, DELTA);
     }
 
+    @Test
+    public void evaluateDenominatorExpressionAndDoubleSign() {
+        Assert.assertEquals(new Evaluator().evaluate("2 / (2 + 3) * 4.33 - -6"), 7.732, DELTA);
+    }
 
 }

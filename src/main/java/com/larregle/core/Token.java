@@ -3,18 +3,8 @@ package com.larregle.core;
 public class Token {
 
     private int index;
-    private int precedence;
     private TokenType tokenType;
     private String text;
-
-
-    public int getPrecedence() {
-        return precedence;
-    }
-
-    public void setPrecedence(int precedence) {
-        this.precedence = precedence;
-    }
 
     public int getIndex() {
         return index;

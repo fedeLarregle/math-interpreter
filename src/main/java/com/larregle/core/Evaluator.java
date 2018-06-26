@@ -24,20 +24,22 @@ public class Evaluator {
             if (index < tokens.size()) {
                 if (tokens.get(index).getTokenType().equals(Token.TokenType.PLUS)) { index++; x += evalTerm(); }
                 else if (tokens.get(index).getTokenType().equals(Token.TokenType.MINUS)) { index++; x += -evalTerm(); }
-            }
-            return x;
+                else return x;
+            } else { return x; }
         }
     }
 
     private double evalTerm() {
         double x = evalFactor();
-        while(index < tokens.size()) {
-            if (tokens.get(index).getTokenType().equals(Token.TokenType.MULTIPLY)) { index++; x *= evalFactor(); }
-            else if (tokens.get(index).getTokenType().equals(Token.TokenType.DIVIDE)) { index++; x /= evalFactor(); }
-            else if (tokens.get(index).getTokenType().equals(Token.TokenType.POW)) { index++; x = Math.pow(x, evalFactor()); }
-            else { return x; }
+        while(true) {
+            if (tokens.size() > index) {
+                if (tokens.get(index).getTokenType().equals(Token.TokenType.MULTIPLY)) { index++; x *= evalFactor(); }
+                else if (tokens.get(index).getTokenType().equals(Token.TokenType.DIVIDE)) { index++; x /= evalFactor(); }
+                else if (tokens.get(index).getTokenType().equals(Token.TokenType.POW)) { index++; x = Math.pow(x, evalFactor()); }
+                else return x;
+            } else { return x; }
+
         }
-        return x;
     }
 
     private double evalFactor() {
@@ -49,15 +51,14 @@ public class Evaluator {
         if (tokens.get(index).getTokenType().equals(Token.TokenType.OPEN_BRACE)) {
             index++;
             x = evalExpression();
-            while (tokens.get(index).getTokenType().equals(Token.TokenType.CLOSE_BRACE)) {
+            if (tokens.size() > index && tokens.get(index).getTokenType().equals(Token.TokenType.CLOSE_BRACE)) {
                 index++;
             }
         } else if (tokens.get(index).getTokenType().equals(Token.TokenType.NUMBER)) {
             x = toDouble(tokens.get(index)); if (tokens.size() > index + 1) {index++;}
         } else if (tokens.get(index).getTokenType().equals(Token.TokenType.FUNCTION)) {
             String function = tokens.get(index).getText(); index++;
-            x = evalFactor();
-            x = evalFunction(function, x);
+            x = evalFunction(function, evalFactor());
         } else {
             throw new RuntimeException("Unexpected token: " + tokens.get(index));
         }
