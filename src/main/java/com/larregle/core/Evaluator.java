@@ -1,5 +1,6 @@
 package com.larregle.core;
 
+import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Evaluator {
         this.index = 0;
     }
 
-    public double evaluate(String expression) {
+    public double evaluate(String expression) throws MalformedInputException {
         this.tokens = new Tokenizer().parse(expression);
         return evalExpression();
     }

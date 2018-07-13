@@ -3,6 +3,8 @@ package com.larregle.core;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.nio.charset.MalformedInputException;
+
 public class EvaluatorTest {
 
     private static final double DELTA = 1e-15;
@@ -57,7 +59,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void evaluateDenominatorExpressionAndDoubleSign() {
+    public void evaluateDenominatorExpressionAndDoubleSign() throws MalformedInputException {
         Assert.assertEquals(new Evaluator().evaluate("2 / (2 + 3) * 4.33 - -6"), 7.732, DELTA);
     }
 

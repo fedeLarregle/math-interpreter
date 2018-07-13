@@ -3,6 +3,7 @@ package com.larregle.core;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.nio.charset.MalformedInputException;
 import java.util.List;
 
 public class TokenizerTest {
@@ -56,6 +57,16 @@ public class TokenizerTest {
         Assert.assertEquals(parse.get(7).getTokenType(), Token.TokenType.MULTIPLY);
         Assert.assertEquals(parse.get(8).getTokenType(), Token.TokenType.NUMBER);
         Assert.assertEquals(parse.get(9).getTokenType(), Token.TokenType.CLOSE_BRACE);
+    }
+
+    @Test(expected = MalformedInputException.class)
+    public void parseIncorrectDecimalNumber() throws Exception {
+        new Tokenizer().parse("123.123.123");
+    }
+
+    @Test(expected = MalformedInputException.class)
+    public void parseIncorrectDecimalNumberCommas() throws Exception {
+        new Tokenizer().parse("123,123,123");
     }
 
 }

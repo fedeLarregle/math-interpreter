@@ -1,5 +1,6 @@
 package com.larregle.core;
 
+import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Tokenizer {
 
     public Tokenizer() { this.index = 0; }
 
-    public List<Token> parse(String expression) {
+    public List<Token> parse(String expression) throws MalformedInputException {
         List<Token> result = new ArrayList<>();
 
         while (index < expression.length()) {
@@ -20,7 +21,7 @@ public class Tokenizer {
         return result;
     }
 
-    private Token getToken(String expression) {
+    private Token getToken(String expression) throws MalformedInputException {
         int startPosition = index;
         char c = expression.charAt(startPosition);
         Token token = new Token();
@@ -58,8 +59,14 @@ public class Tokenizer {
             }
             default:
                 if (Character.isDigit(c)) {
+                    boolean decimal = false;
                     while (expression.length() > index) {
-                        if(Character.isDigit(expression.charAt(index)) || expression.charAt(index) == '.') {
+                        if (expression.charAt(index) == '.') {
+                            if (decimal) { throw new MalformedInputException(index); }
+                            decimal = true;
+                            index++;
+                        }
+                        if(Character.isDigit(expression.charAt(index))) {
                             index++;
                         } else { break; }
                     }
@@ -77,6 +84,8 @@ public class Tokenizer {
                     token.setText(expression.substring(startPosition, index));
                     token.setTokenType(Token.TokenType.FUNCTION);
                     break;
+                } else {
+                    throw new MalformedInputException(index);
                 }
         }
 
